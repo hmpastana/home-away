@@ -1,15 +1,15 @@
 import { fetchPropertyDetails } from '@/utils/actions';
 import { redirect } from 'next/navigation';
-import BreadCrumbs from '../BreadCrumbs';
+import BreadCrumbs from '../../../components/properties/BreadCrumbs';
 import FavoriteToggleButton from '@/components/card/FavoriteToggleButton';
-import ShareButton from '../ShareButton';
-import ImageContainer from '../ImageContainer';
+import ShareButton from '../../../components/properties/ShareButton';
+import ImageContainer from '../../../components/properties/ImageContainer';
 import PropertyRating from '@/components/card/PropertyRating';
-import BookingCalendar from '../booking/BookingCalendar';
-import PropertyDetails from '../PropertyDetails';
-import UserInfo from '../UserInfo';
-import Amenities from '../Amenities';
-import Description from '../Description';
+import BookingCalendar from '../../../components/properties/BookingCalendar';
+import PropertyDetails from '../../../components/properties/PropertyDetails';
+import UserInfo from '../../../components/properties/UserInfo';
+import Amenities from '../../../components/properties/Amenities';
+import Description from '@/components/properties/Description';
 import { Separator } from '@/components/ui/separator';
 
 
@@ -21,6 +21,14 @@ async function PropertyDetailsPage({ params }: { params: { id: string } }) {
 
     const firstName = property.profile.firstName;
     const profileImage = property.profile.profileImage;
+
+    // const DynamicMap = dynamic(
+    //     () => import('@/components/properties/PropertyMap'),
+    //     {
+    //         ssr: false,
+    //         loading: () => <Skeleton className='h-[400px] w-full' />,
+    //     }
+    // );
 
     return <section>
         <BreadCrumbs name={property.name} />
