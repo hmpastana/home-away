@@ -11,6 +11,8 @@ import UserInfo from '../../../components/properties/UserInfo';
 import Amenities from '../../../components/properties/Amenities';
 import Description from '@/components/properties/Description';
 import { Separator } from '@/components/ui/separator';
+import dynamic from 'next/dynamic';
+import { Skeleton } from '@/components/ui/skeleton';
 
 
 async function PropertyDetailsPage({ params }: { params: { id: string } }) {
@@ -22,13 +24,13 @@ async function PropertyDetailsPage({ params }: { params: { id: string } }) {
     const firstName = property.profile.firstName;
     const profileImage = property.profile.profileImage;
 
-    // const DynamicMap = dynamic(
-    //     () => import('@/components/properties/PropertyMap'),
-    //     {
-    //         ssr: false,
-    //         loading: () => <Skeleton className='h-[400px] w-full' />,
-    //     }
-    // );
+    const DynamicMap = dynamic(
+        () => import('@/components/properties/PropertyMap'),
+        {
+            ssr: false,
+            loading: () => <Skeleton className='h-[400px] w-full' />,
+        }
+    );
 
     return <section>
         <BreadCrumbs name={property.name} />
@@ -57,7 +59,7 @@ async function PropertyDetailsPage({ params }: { params: { id: string } }) {
                 <BookingCalendar />
             </div>
         </section>
-
+        <DynamicMap countryCode={property.country} />
     </section>
 }
 export default PropertyDetailsPage;
